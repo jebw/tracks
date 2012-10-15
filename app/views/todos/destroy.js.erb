@@ -6,6 +6,7 @@
   activate_pending_todos();
   update_predecessors();
   show_empty_messages();
+	setTimeout(total_time_tags, 600) ;
 <%- else -%>
   TracksPages.page_notify('error', "<%= t('todos.error_deleting_item', :description => @todo.description) %>", 8);
 <%- end -%>

@@ -1,0 +1,41 @@
+<h3>Total time: <span id="hours_total">?</span> hours</h3>
+
+<% content_for :head do %>
+<script type="text/javascript" charset="utf-8">
+	function total_time_tags() {
+		var total_mins = 0.00 ;
+				
+		$('#tickleritems span.tag a').each(function() {			
+			var tag_content = $(this).text() ;
+			
+			if (tag_content.match(/\d+(\.\d+)?\s*h(ou)?rs?/i)) {
+				total_mins += 60 * parseFloat(tag_content) ;
+			} else if (tag_content.match(/\d+(\.\d+)?\s*min(ute)?s?/i)) {
+				total_mins += parseFloat(tag_content) ;
+			} else if (tag_content.match(/\d+(\.\d+)?\s*days?/i)) {
+				total_mins += 60 * 7 * parseFloat(tag_content) ;
+			}			
+		}) ;
+		
+		$('#p64items span.tag a').each(function() {			
+			var tag_content = $(this).text() ;
+			
+			if (tag_content.match(/\d+(\.\d+)?\s*h(ou)?rs?/i)) {
+				total_mins += 60 * parseFloat(tag_content) ;
+			} else if (tag_content.match(/\d+(\.\d+)?\s*min(ute)?s?/i)) {
+				total_mins += parseFloat(tag_content) ;
+			} else if (tag_content.match(/\d+(\.\d+)?\s*days?/i)) {
+				total_mins += 60 * 7 * parseFloat(tag_content) ;
+			}			
+		}) ;
+		
+		var total_quarter_hours = Math.ceil(total_mins / 25) ;
+		
+		$('#hours_total').html(total_quarter_hours / 4) ;
+	}
+
+	$(function() {
+		total_time_tags() ;
+	}) ;
+</script>
+<% end %>
