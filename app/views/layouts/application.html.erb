@@ -50,6 +50,10 @@
         &nbsp;|&nbsp;
 	       <%= link_to(t('layouts.toggle_notes'), "#", {:accesskey => "S", :title => t('layouts.toggle_notes_title'), :id => "toggle-notes-nav"}) %>
         &nbsp;|&nbsp;
+        <% if SITE_CONFIG['shared_user'] %>
+          <%= link_to("Switch to #{(session[:orig_user_id].nil? ? SITE_CONFIG['shared_user'] : 'self')}", switch_users_path, :method => :post) %>
+          &nbsp;|&nbsp;
+        <% end %>
         <%= link_to("#{t('common.logout')} (#{current_user.display_name}) &raquo;".html_safe, logout_path) %>
       </div>
       <div id="navcontainer">

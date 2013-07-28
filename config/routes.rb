@@ -129,6 +129,7 @@ Tracksapp::Application.routes.draw do
       post 'update_auth_type'
       post 'refresh_token'
     end
+    collection { post 'switch' }
   end
   match 'signup' => "users#new"
   

@@ -190,6 +190,20 @@ class UsersController < ApplicationController
     redirect_to preferences_path
   end
 
+  def switch
+    if request.post?
+      if session[:orig_user_id]
+        session[:user_id] = session[:orig_user_id]
+        session[:orig_user_id] = nil
+      elsif SITE_CONFIG['shared_user'] && new_user_id = User.find_by_login(SITE_CONFIG['shared_user'])
+        session[:orig_user_id] = session[:user_id]
+        session[:user_id] = new_user_id
+      end
+    end
+
+    redirect_to root_url
+  end
+
   private
 
   def get_new_user
